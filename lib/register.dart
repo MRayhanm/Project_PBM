@@ -50,7 +50,7 @@ class RegisterPage extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(left: 13.0, right:9.0),
                     alignment: Alignment.topLeft,
-                    child:Text('Email',style: TextStyle(fontWeight: FontWeight.w800)),
+                    child:Text('Email',style: TextStyle(fontWeight: FontWeight.w600)),
                   ),
                   Container(
                     height: 70,
