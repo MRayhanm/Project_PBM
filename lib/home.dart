@@ -1,22 +1,25 @@
+import 'package:awal/car_description.dart';
 import 'package:awal/category_user.dart';
+import 'package:awal/list_car_user.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const HomePage());
 }
-
-class HomePage extends StatelessWidget {
+int _selectedIndex = 0;
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Welcome to Flutter',
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text(''),
-        ),
-        body: Center(
+        body: SafeArea(
           child: Column(
             children: [
               Container(
@@ -244,30 +247,7 @@ class HomePage extends StatelessWidget {
           ),
         
         ),
-        bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'Riawayat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
-            label: 'Maps',
-          ),
-           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: 0,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Color.fromARGB(255, 0, 14, 26),
-        showUnselectedLabels: true,
-       ),
+
       ),
     );
   }

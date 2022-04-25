@@ -1,4 +1,5 @@
 import 'package:awal/admin.dart';
+import 'package:awal/bottom.dart';
 import 'package:awal/home.dart';
 import 'package:awal/register.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,6 @@ class LoginPage extends StatelessWidget {
               Navigator.pop(context);
             }),
           ),
-          // KURANG BOTTOOM !!
         ),
         body: SafeArea(
           child: Column(
@@ -74,7 +74,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(height: 50,),
                     ElevatedButton(onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return const HomePage();
+                        return const BottomPage();
                       }));
                     }, 
                     child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)

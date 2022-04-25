@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const CategoryPage());
 }
-
+int _selectedIndex = 1;
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key? key}) : super(key: key);
 
@@ -23,6 +23,10 @@ class CategoryPage extends StatelessWidget {
               icon: Image.asset('assets/logo2.png'),
               iconSize: 180,),
         ),
+           leading: IconButton(
+             onPressed: (){
+               Navigator.pop(context);
+             }, icon: Icon(Icons.arrow_back_ios_new_outlined))
         ),
         body: Center(
           child: Column(

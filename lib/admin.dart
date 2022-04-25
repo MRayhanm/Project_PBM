@@ -1,148 +1,119 @@
+import 'package:awal/admin.dart';
+import 'package:awal/login.dart';
+import 'package:awal/loginadmin.dart';
+import 'package:awal/register.dart';
+import 'package:awal/registeramdin.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const RegisterAdminPage());
+  runApp(const AdminPage());
 }
 
-class RegisterAdminPage extends StatelessWidget {
-  const RegisterAdminPage({Key? key}) : super(key: key);
-
+class AdminPage extends StatelessWidget {
+  const AdminPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var white;
     return MaterialApp(
-      title: 'profile',
+      title: 'Welcome to Flutter',
       home: Scaffold(
-        appBar: AppBar(
-          title: Icon(Icons.arrow_back_ios_new_sharp,color: Colors.white,),
-          // KURANG BOTTOOM !!
-        ),
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children:<Widget>[
-                  Container(
-                    height: 80,
-                    alignment: Alignment.topCenter,
-                    child: Text
-                    ('Daftar Admin', style: TextStyle(fontSize: 40,fontWeight: FontWeight.w900)
-                    ,)
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 13.0, right:9.0),
-                    alignment: Alignment.topLeft,
-                    child:Text('Nama',style: TextStyle(fontWeight: FontWeight.w800)),
-                  ),
-                  Container(
-                    height: 70,
-                    width: 380,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Nama',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.black))
-                      ),
+        body: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                Color.fromARGB(255, 105, 164, 194),
+                Colors.white
+              ])
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: Container(
+                    height: 340,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: Image.asset('assets/logo.png'),
+                        ),
+                        SizedBox(
+                          child: Text("SEWA MOBIL LEBIH MUDAH",style: TextStyle(fontSize: 19,),),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(onPressed: (() {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return const LoginadminPage();
+                          }));
+                        }),
+                                style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(255, 0, 37, 68),
+                                onPrimary: Colors.black,
+                                shadowColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  
+                                )
+                              ), 
+                        child: Container(
+                                  alignment: Alignment.center,
+                                  height: 50,
+                                  width: 170,
+                                  child: const Text("MASUK", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white),
+                                )
+                              ) 
+                            ),
+                          ElevatedButton(onPressed: (() {
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return const RegisterAdminPage();
+                          }));
+                        }), 
+                                style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(255, 0, 37, 68),
+                                onPrimary: Colors.black,
+                                shadowColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  
+                                )
+                              ),
+                        child: Container(
+                                  alignment: Alignment.center,
+                                  height: 50,
+                                  width: 170,
+                                  child: const Text("DAFTAR", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white),
+                                ))),
+                         ElevatedButton(onPressed: (() {
+                          Navigator.pop(context);
+                        }),
+                                style: ElevatedButton.styleFrom(
+                                primary: Color.fromARGB(255, 0, 37, 68),
+                                onPrimary: Colors.black,
+                                shadowColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  
+                                )
+                              ), 
+                        child: Container(
+                                  alignment: Alignment.center,
+                                  height: 50,
+                                  width: 170,
+                                  child: const Text("Kembali", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white),
+                                )
+                              ) 
+                            ),
+                      ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(left: 13.0, right:9.0),
-                    alignment: Alignment.topLeft,
-                    child:Text('Email',style: TextStyle(fontWeight: FontWeight.w800)),
-                  ),
-                  Container(
-                    height: 70,
-                    width: 380,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'email',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.black))
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 13.0, right:9.0),
-                    alignment: Alignment.topLeft,
-                    child:Text('Password',style: TextStyle(fontWeight: FontWeight.w800)),
-                  ),
-                  Container(
-                    height: 70,
-                    width: 380,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.black))
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 13.0, right:9.0),
-                    alignment: Alignment.topLeft,
-                    child:Text('No.Handphone',style: TextStyle(fontWeight: FontWeight.w800)),
-                  ),
-                  Container(
-                    height: 70,
-                    width: 380,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'No.Handphone',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.black))
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 13.0, right:9.0),
-                    alignment: Alignment.topLeft,
-                    child:Text('Alamat Penyewaan',style: TextStyle(fontWeight: FontWeight.w800)),
-                  ),
-                 Container(
-                    height: 70,
-                    width: 380,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Alamat Penyewaan',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.black))
-                      ),
-                    ),
-                  ),
-                   Container(
-                    padding: EdgeInsets.only(left: 13.0, right:9.0),
-                    alignment: Alignment.topLeft,
-                    child:
-                      Text('Kartu Tanda Penduduk',style: TextStyle(fontWeight: FontWeight.w800)),
-                    // KURANG ICON DROBBOX
-                  ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    color:Color.fromARGB(255, 187, 185, 180),
-                    height: 30,
-                    width: 150,
-                    child: Icon(Icons.upload,size: 30,),
-                  ),
-                  
-                    SizedBox(height: 50,),
-                    ElevatedButton(onPressed: () {
-                      
-                    }, 
-                    child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)
-                    
-                  
-
-                  
-            ],
-            )
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
-  }
-}
-
+  }}

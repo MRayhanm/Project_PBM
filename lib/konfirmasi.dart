@@ -1,19 +1,17 @@
-import 'package:awal/home.dart';
-import 'package:awal/pembayaran.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const CarDescription());
-}
 
-class CarDescription extends StatelessWidget {
-  const CarDescription({Key? key}) : super(key: key);
+
+class ConfirmPage extends StatelessWidget {
+
+  String tujuan,alamat,durasi;
+
+   ConfirmPage({required this.tujuan, required this.alamat, required this.durasi});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-
         appBar: AppBar(
           title: const Text(''),
           leading: IconButton(
@@ -24,32 +22,6 @@ class CarDescription extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Container(
-                height: 160,
-                color: Color.fromARGB(255, 245, 245, 245),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: 280,
-                    height: 100,
-                    color: Colors.white,
-                    child: Image.asset('assets/1.jpg'),
-                  ),
-                )
-              ),
-              Container(
-                color: const Color.fromARGB(255, 245, 245, 245),
-                alignment: Alignment.topLeft,
-                child: Text("Daihatsu Terios",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),),
-              ),
-                Container(
-                color: const Color.fromARGB(255, 245, 245, 245),
-                alignment: Alignment.topLeft,
-                child: Text("Rp. 200.000 / hari",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700, color: Colors.red),),
-              ),
               Container(
                   height: 460,
                   width: 500,
@@ -71,39 +43,69 @@ class CarDescription extends StatelessWidget {
                                 blurRadius: 5,
                               ),
                             ],
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 204, 232, 255),
                             ),
                             height: 400,
                             width: 376,
                             child: SizedBox(
                               child: Column(
                                 children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                        height: 160,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20.0),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            width: 130,
+                                            height: 100,
+                                            child: Image.asset('assets/1.jpg'),
+                                          ),
+                                        )
+                                      ),
+                                      Column(
+                                        children: [
+                                          Container(
+                                              child: Text("Daihatsu Terios",
+                                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),),
+                                              ),
+                                          Container(
+                                              child: Text("Rp. 200.000 / hari",
+                                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700, color: Colors.red),),
+                                              ),
+                                          Container(
+                                              child: Text('Sewa = ${durasi} Hari',
+                                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700,),),
+                                              ),
+                                        ],
+                                      ),
+                                  ],
+                                ),
                                   Container(
-                                    child: Text("Deskripsi", style: TextStyle(
+                                    alignment: Alignment.center,
+                                    color: Color.fromARGB(255, 128, 178, 219),
+                                    width: 400,
+                                    height: 55,
+                                    child: Text("Total Sewa : ${durasi}", style: TextStyle(
                                       fontSize: 30,
                                     ),)
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Container(
+                                      height: 145,
                                       alignment: Alignment.center,
                                       child: Column(
-                                        children: [Text("Tipe Mesin : IL, 4 Cylinder, 16 Valve, DOHC, Dual VVT-i", style: TextStyle(fontSize: 16),),
-                                        Text("Kapasitas Mesin : 1496 cc", style: TextStyle(fontSize: 16),),
-                                        Text("Silinder : 4", style: TextStyle(fontSize: 16),),
-                                        Text("Transmisi : Manual", style: TextStyle(fontSize: 16),),
-                                        Text("Tipe Transmisi : 5 Kecepatan", style: TextStyle(fontSize: 16),),
-                                        Text("Tenaga Maksimal :104 HP / 6000 rpm", style: TextStyle(fontSize: 16),),
-                                        Text("Torsi Maksimal: 139 nm / 4200 rpm", style: TextStyle(fontSize: 16),),
-                                        Text("Bahan Bakar: Bensin", style: TextStyle(fontSize: 16),),
-                                        SizedBox(height: 20,),
-                                        Text("Alamat penyewaan        : -", style: TextStyle(fontSize: 16),),
-                                        Text("Contact Person        : - ", style: TextStyle(fontSize: 16),),
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text('tujuan: ${tujuan}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
+                                          Text('alamat: ${alamat}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PembayaranPage(),
-                          ));
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //   builder: (context) => PembayaranPage(),
+                        //   ));
                       }, 
                       style: ElevatedButton.styleFrom(
                         primary: Colors.red,
@@ -118,7 +120,7 @@ class CarDescription extends StatelessWidget {
                         alignment: Alignment.center,
                         height: 15,
                         width: 75,
-                        child: const Text("Sewa", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
+                        child: const Text("Batalkan", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
                       )),
                   ),
                                         ],

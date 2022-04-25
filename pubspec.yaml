@@ -68,6 +68,7 @@ flutter:
      - assets/avanza2.jpg
      - assets/brio.jpg
      - assets/logo2.png
+     - assets/pngegg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

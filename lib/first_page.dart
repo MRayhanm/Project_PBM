@@ -43,7 +43,7 @@ class FirstPage extends StatelessWidget {
                           height: 20,
                         ),
                         ElevatedButton(onPressed: (() {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
                             return const LoginPage();
                           }));
                         }),
@@ -65,7 +65,7 @@ class FirstPage extends StatelessWidget {
                               ) 
                             ),
                           ElevatedButton(onPressed: (() {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
                             return const RegisterPage();
                           }));
                         }), 
@@ -85,8 +85,8 @@ class FirstPage extends StatelessWidget {
                                   child: const Text("DAFTAR", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white),
                                 ))),
                           ElevatedButton(onPressed: (() {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                            return const RegisterAdminPage();
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return const AdminPage();
                           }));
                         }
                         ),
