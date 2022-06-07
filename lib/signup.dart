@@ -8,19 +8,19 @@ import 'package:flutter/material.dart';
 
 
 
-class LoginPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
   final VoidCallback onClickedSignUp;
 
-  const LoginPage({
+  const SignUpPage({
     Key? key,
     required this.onClickedSignUp,
   }):super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                             height: 80,
                             alignment: Alignment.topCenter,
                             child: Text
-                            ('Masuk', style: TextStyle(fontSize: 40,fontWeight: FontWeight.w900)
+                            ('Daftar', style: TextStyle(fontSize: 40,fontWeight: FontWeight.w900)
                             ,)
                           ),
                           Container(
@@ -90,16 +90,16 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                             SizedBox(height: 30,),
-                            ElevatedButton(onPressed: signIn, 
+                            ElevatedButton(onPressed: signUp, 
                             child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),),
                             SizedBox(height: 20,),
                             RichText(text: TextSpan(
-                              text: 'Belum memiliki akun?',
+                              text: 'Sudah memiliki akun?',
                               style: TextStyle(color: Colors.black, fontSize: 14),
                               children: [TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = widget.onClickedSignUp,
-                                text: 'Daftar akun',
+                                text: 'Login',
                                 style: TextStyle(
                                   decoration: TextDecoration.underline,
                                 )
@@ -113,11 +113,16 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future signIn() async{
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+  Future signUp() async {
+    try{
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailController.text.trim(),
       password: passwordController.text.trim(), 
     );
+    }
+    on FirebaseException catch(e) {
+      print(e);
+    }
   }
 }
 

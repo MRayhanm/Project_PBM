@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "164215994881",
+    "project_id": "pbm-project-5405d",
+    "storage_bucket": "pbm-project-5405d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164215994881:android:b83e5d9ff4c16826cf1e00",
+        "android_client_info": {
+          "package_name": "com.example.awal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164215994881-n2jsoccjgifttfpk4pr20ielo92ggvhv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmDaTWBZaRqnib8L7ZT2ll3p2_un6L2e8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164215994881-n2jsoccjgifttfpk4pr20ielo92ggvhv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

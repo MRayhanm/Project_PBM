@@ -1,4 +1,5 @@
 import 'package:awal/profileadmin.dart';
+import 'package:awal/status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -43,7 +44,11 @@ class RiwayatadminPage extends StatelessWidget {
                           Container(
                             alignment: Alignment.topRight,
                             child:IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {                      
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return MapSample();
+                      }));
+                        },
                                     icon: Icon(Icons.delete), ),
                           ),
                           Container(

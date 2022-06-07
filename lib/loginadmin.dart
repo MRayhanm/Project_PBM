@@ -140,11 +140,7 @@ class _LoginadminPageState extends State<LoginadminPage> {
                         ),
                           SizedBox(height: 20,),
 
-                          ElevatedButton(onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ProfileadminPage(nama: _nama.text, alamatadmin: _alamatadmin.text, nomorhp: _nomorhp.text)
-                                ));
-                          }, 
+                          ElevatedButton(onPressed: () {}, 
                           child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)
                         
                   ],
@@ -161,6 +157,10 @@ class _LoginadminPageState extends State<LoginadminPage> {
 
 
 
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //   builder: (context) => ProfileadminPage(nama: _nama.text, alamatadmin: _alamatadmin.text, nomorhp: _nomorhp.text)
+                              //   ));
+                          
 // import 'package:awal/admin.dart';
 // import 'package:awal/bottom.dart';
 // import 'package:awal/home.dart';

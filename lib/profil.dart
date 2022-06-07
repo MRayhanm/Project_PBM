@@ -1,6 +1,7 @@
 import 'package:awal/editprofil.dart';
 import 'package:awal/editprofiladmin.dart';
 import 'package:awal/konfirmasi.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -63,7 +64,7 @@ class _ProfilPageState extends State<ProfilPage> {
                             ],
                             color: Color.fromARGB(255, 255, 255, 255),
                             ),
-                            height: 200,
+                            height: 220,
                             width: 376,
                             child: SizedBox(
                               child: Column(
@@ -71,7 +72,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Container(
-                                      height: 145,
+                                      height: 165,
                                       alignment: Alignment.center,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -103,6 +104,24 @@ class _ProfilPageState extends State<ProfilPage> {
                         height: 15,
                         width: 75,
                         child: const Text("Edit", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
+                      )),
+                  ),
+                  ElevatedButton(
+                      onPressed: () => FirebaseAuth.instance.signOut(),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 155, 0, 0),
+                        onPrimary: Colors.black,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          
+                        )
+                      ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 15,
+                        width: 75,
+                        child: const Text("Keluar", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
                       )),
                   ),
                                         ],

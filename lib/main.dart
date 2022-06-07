@@ -1,9 +1,16 @@
 import 'package:awal/first_page.dart';
+import 'package:awal/tambahmobil.dart';
 import 'package:awal/home.dart';
 import 'package:awal/login.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

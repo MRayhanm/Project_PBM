@@ -1,3 +1,4 @@
+import 'package:awal/konfirmasiadmin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -80,7 +81,7 @@ class PesananPage extends StatelessWidget {
                       height: 40,
                       width: 430,
                       alignment: Alignment.center,
-                      child: Text("Totak Sewa : Rp 200.000 /hari", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
+                      child: Text("Total Sewa : Rp 200.000 /hari", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 18)),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: Color.fromARGB(255, 91, 152, 223))
@@ -89,20 +90,32 @@ class PesananPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Container(
+                        ElevatedButton(onPressed: (){                      
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return const ConfirmAdmin();
+                      }));
+                        }, 
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 0, 212, 110),
+                        ),
+                        child: Container(
                           alignment: Alignment.center,
-                          color: Color.fromARGB(255, 0, 212, 110),
                           height:40 ,
                           width: 120,
                           child: Text('KONFIRMASI', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14,color: Color.fromARGB(255, 255, 255, 255))),
+                        ),),
+                        ElevatedButton(onPressed: (){
+
+                        }, 
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 212, 14, 0),
                         ),
-                        Container(
+                        child: Container(
                           alignment: Alignment.center,
-                          color: Color.fromARGB(255, 212, 14, 0),
                           height:40 ,
                           width: 120,
                           child: Text('TOLAK', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14,color: Color.fromARGB(255, 255, 255, 255))),
-                        )
+                        ),),
                       ],
                     )                    
                   ],

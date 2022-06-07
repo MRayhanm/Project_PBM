@@ -1,5 +1,7 @@
 import 'package:awal/admin.dart';
 import 'package:awal/login.dart';
+import 'package:awal/masuk.dart';
+import 'package:awal/masukadmin.dart';
 import 'package:awal/register.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +17,7 @@ class FirstPage extends StatelessWidget {
     return MaterialApp(
       title: 'Welcome to Flutter',
       home: Scaffold(
-        body: Center(
-          child: Container(
+        body: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
                 Color.fromARGB(255, 105, 164, 194),
@@ -44,7 +45,7 @@ class FirstPage extends StatelessWidget {
                         ),
                         ElevatedButton(onPressed: (() {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const LoginPage();
+                            return const MasukPage();
                           }));
                         }),
                                 style: ElevatedButton.styleFrom(
@@ -64,29 +65,29 @@ class FirstPage extends StatelessWidget {
                                 )
                               ) 
                             ),
-                          ElevatedButton(onPressed: (() {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const RegisterPage();
-                          }));
-                        }), 
-                                style: ElevatedButton.styleFrom(
-                                primary: Color.fromARGB(255, 0, 37, 68),
-                                onPrimary: Colors.black,
-                                shadowColor: Colors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25),
+                        //   ElevatedButton(onPressed: (() {
+                        //   Navigator.push(context, MaterialPageRoute(builder: (context){
+                        //     return const RegisterPage();
+                        //   }));
+                        // }), 
+                        //         style: ElevatedButton.styleFrom(
+                        //         primary: Color.fromARGB(255, 0, 37, 68),
+                        //         onPrimary: Colors.black,
+                        //         shadowColor: Colors.black,
+                        //         shape: RoundedRectangleBorder(
+                        //           borderRadius: BorderRadius.circular(25),
                                   
-                                )
-                              ),
-                        child: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 170,
-                                  child: const Text("DAFTAR", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white),
-                                ))),
+                        //         )
+                        //       ),
+                        // child: Container(
+                        //           alignment: Alignment.center,
+                        //           height: 50,
+                        //           width: 170,
+                        //           child: const Text("DAFTAR", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,color: Colors.white),
+                        //         ))),
                           ElevatedButton(onPressed: (() {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const AdminPage();
+                            return const MasukAdminPage();
                           }));
                         }
                         ),
@@ -115,7 +116,7 @@ class FirstPage extends StatelessWidget {
               ],
             ),
           ),
-        ),
+        
       ),
     );
   }}

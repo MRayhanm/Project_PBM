@@ -1,3 +1,4 @@
+import 'package:awal/status.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,7 +37,7 @@ class _PengembalianPageState extends State<PengembalianPage> {
                       children: [
                         Container(
                           width: MediaQuery.of(context).size.width * 0.5,
-                          child: Image.asset('lib/assets/car.jpg'),
+                          child: Image.asset('assets/1.jpg'),
                         ),
                         SizedBox(height: 10),
                         Text(
@@ -115,7 +116,12 @@ class _PengembalianPageState extends State<PengembalianPage> {
                           style: TextButton.styleFrom(
                             backgroundColor: Color(0xff6F1E51),
                           ),
-                          onPressed: () {},
+                          onPressed: () {                      
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return MapSample();
+                      }));
+
+                          },
                           child: Padding(
                             padding: EdgeInsets.all(15),
                             child: Text(
