@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:awal/profileadmin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -74,7 +75,7 @@ Future openGallery() async {
                                         child: Column(
                                           children: [
                                             Text(
-                                              'Choose Profile Photo',
+                                              'Pilih gambar dari',
                                               style: TextStyle(fontSize: 20),
                                             ),
                                             SizedBox(
@@ -296,7 +297,8 @@ Future openGallery() async {
                           // final merk = controller.text;
 
                           createCars(cars);
-                          Navigator.pop(context);
+                          _showDialog(context);
+                          
                         }, 
                         child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)
                       
@@ -365,3 +367,22 @@ class Cars{
     silinder: json['silinder'],
     );
 }
+_showDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text("Mobil berhasil ditambahkan"),
+            actions: <Widget>[
+              new ElevatedButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.push(context,MaterialPageRoute(builder: (context){
+                                          return ProfileadminPage();
+                                        }));
+                },
+              ),
+            ],
+          );
+        });
+  }

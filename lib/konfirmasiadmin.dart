@@ -28,7 +28,7 @@ class ConfirmAdmin extends StatelessWidget {
         body: Column(
           children: [
               Container(
-                  height: 675,
+                  height: 656,
                   width: 500,
                   decoration: BoxDecoration(
                   color: Color.fromARGB(255, 245, 245, 245)),
@@ -56,7 +56,7 @@ class ConfirmAdmin extends StatelessWidget {
                               child: Column(
                                 children: [
                                               Container(
-                height: 160,
+                height: 140,
                 color: Color.fromARGB(255, 255, 255, 255),
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),

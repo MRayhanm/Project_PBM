@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 130,
+                                    height: 128,
                                     child: IconButton(
                                       onPressed: () {},
                                       icon: Image.asset('assets/brio-red.jpg'),
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 130,
+                                    height: 128,
                                     child: IconButton(
                                       onPressed: () {},
                                       icon: Image.asset('assets/jazz-old.jpg'),
@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 130,
+                                    height: 128,
                                     child: IconButton(
                                       onPressed: () {},
                                       icon: Image.asset('assets/1.jpg'),
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   Container(
-                                    height: 130,
+                                    height: 128,
                                     child: IconButton(
                                       onPressed: () {},
                                       icon: Image.asset('assets/avanza.jpg'),

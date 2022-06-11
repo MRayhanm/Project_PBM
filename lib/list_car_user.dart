@@ -17,7 +17,7 @@ class CarlistPage extends StatelessWidget {
           child: Column(
               children: [
                 Container(
-                  height: 290,
+                  height: 277,
                   width: 400,
                   child: Container(
                     alignment: Alignment.topLeft,

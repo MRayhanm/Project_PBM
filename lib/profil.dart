@@ -37,7 +37,7 @@ class _ProfilPageState extends State<ProfilPage> {
         body: Column(
           children: [
               Container(
-                  height: 680,
+                  height: 661,
                   width: 500,
                   decoration: BoxDecoration(
                   color: Color.fromARGB(255, 245, 245, 245)),
@@ -64,7 +64,7 @@ class _ProfilPageState extends State<ProfilPage> {
                             ],
                             color: Color.fromARGB(255, 255, 255, 255),
                             ),
-                            height: 220,
+                            height: 221,
                             width: 376,
                             child: SizedBox(
                               child: Column(
@@ -72,7 +72,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Container(
-                                      height: 165,
+                                      height: 175,
                                       alignment: Alignment.center,
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -101,7 +101,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       ),
                       child: Container(
                         alignment: Alignment.center,
-                        height: 15,
+                        height: 20,
                         width: 75,
                         child: const Text("Edit", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
                       )),
@@ -119,7 +119,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       ),
                       child: Container(
                         alignment: Alignment.center,
-                        height: 15,
+                        height: 20,
                         width: 75,
                         child: const Text("Keluar", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
                       )),

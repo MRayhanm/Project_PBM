@@ -51,7 +51,7 @@ class CarDescription extends StatelessWidget {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700, color: Colors.red),),
               ),
               Container(
-                  height: 460,
+                  height: 443,
                   width: 500,
                   decoration: BoxDecoration(
                   color: Color.fromARGB(255, 245, 245, 245)),
@@ -73,7 +73,7 @@ class CarDescription extends StatelessWidget {
                             ],
                             color: Colors.white,
                             ),
-                            height: 400,
+                            height: 383,
                             width: 376,
                             child: SizedBox(
                               child: Column(
@@ -116,7 +116,7 @@ class CarDescription extends StatelessWidget {
                       ),
                       child: Container(
                         alignment: Alignment.center,
-                        height: 15,
+                        height: 20,
                         width: 75,
                         child: const Text("Sewa", style: TextStyle(fontSize: 19, fontWeight: FontWeight.w700,color: Colors.white),
                       )),

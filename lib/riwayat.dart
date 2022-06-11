@@ -27,7 +27,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
               children: [
                 Container(
                   color: Color.fromARGB(255, 245, 245, 245),
-                  height: 680,
+                  height: 661,
                   child: ListView(
                     children: [
               Container(

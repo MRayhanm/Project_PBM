@@ -26,7 +26,7 @@ class ProfileadminPage extends StatelessWidget {
             children: <Widget>[
               Container(  
                 padding: EdgeInsets.only(left: 10,right: 0),
-                height: 200,
+                height: 181,
                 width: 340,
                 alignment: Alignment.centerLeft,
                 child: Column( 

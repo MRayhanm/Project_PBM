@@ -23,7 +23,7 @@ class RiwayatadminPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 670,
+                height: 656,
                 child: ListView(
                   children:<Widget>[
                     Container(  

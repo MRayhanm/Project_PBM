@@ -88,7 +88,7 @@ class CategoryPage extends StatelessWidget {
                             ],
                             color: Colors.white,
                             ),
-                            height: 191,
+                            height: 195,
                             width: 370,
                             child: SizedBox(
                               child: Column(
@@ -136,7 +136,7 @@ class CategoryPage extends StatelessWidget {
                             ],
                             color: Colors.white,
                             ),
-                            height: 191,
+                            height: 195,
                             width: 370,
                             child: SizedBox(
                               child: Column(
