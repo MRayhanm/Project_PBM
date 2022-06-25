@@ -1,8 +1,4 @@
-
-import 'package:awal/bottom.dart';
 import 'package:awal/bottomadmin.dart';
-import 'package:awal/profileadmin.dart';
-import 'package:awal/register.dart';
 import 'package:awal/registeramdin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,17 +12,11 @@ class LoginAdmin extends StatefulWidget {
 }
 
 class _LoginAdminState extends State<LoginAdmin> {
-  // form key
   final _formKey = GlobalKey<FormState>();
-
-  // editing controller
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
-  // firebase
   final _auth = FirebaseAuth.instance;
-  
-  // string for displaying the error Message
   String? errorMessage;
 
   @override
@@ -60,7 +50,6 @@ class _LoginAdminState extends State<LoginAdmin> {
           ),
         ));
 
-    //password field
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordController,
@@ -141,13 +130,14 @@ class _LoginAdminState extends State<LoginAdmin> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          RegistrationAdmin(onClickedSignUp: () {  },)));
+                                      builder: (context) => RegistrationAdmin(
+                                            onClickedSignUp: () {},
+                                          )));
                             },
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                  color: Colors.redAccent,
+                                  color: Color.fromARGB(255, 0, 20, 77),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15),
                             ),
@@ -163,7 +153,6 @@ class _LoginAdminState extends State<LoginAdmin> {
     );
   }
 
-  // login function
   void signIn(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -171,8 +160,8 @@ class _LoginAdminState extends State<LoginAdmin> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: "Login Successful"),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => BottomAdminPage())),
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => BottomAdminPage())),
                 });
       } on FirebaseAuthException catch (error) {
         switch (error.code) {
@@ -204,67 +193,3 @@ class _LoginAdminState extends State<LoginAdmin> {
     }
   }
 }
-// import 'package:awal/admin.dart';
-// import 'package:awal/auth.dart';
-// import 'package:awal/bottom.dart';
-// import 'package:awal/home.dart';
-// import 'package:awal/login.dart';
-// import 'package:awal/profileadmin.dart';
-// import 'package:awal/register.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-
-
-// void main() {
-//   runApp(const MasukAdminPage());
-// }
-
-// class MasukAdminPage extends StatefulWidget {
-//   const MasukAdminPage({Key? key}) : super(key: key);
-
-//   @override
-//   State<MasukAdminPage> createState() => _MasukAdminPageState();
-// }
-
-// class _MasukAdminPageState extends State<MasukAdminPage> {
-//   final emailController = TextEditingController();
-//   final passwordController = TextEditingController();
-
-//   @override
-//   void dispose() {
-//     emailController.dispose();
-//     passwordController.dispose();
-
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var white;
-//     return MaterialApp(
-//       title: 'profile',
-//       home: Scaffold(
-//         body: Center(
-//           child: StreamBuilder<User?>(
-//               stream: FirebaseAuth.instance.authStateChanges(),
-//               builder: (context, snapshot) {
-//                 if (snapshot.hasData){
-//                   return ProfileadminPage();
-//                   }
-//                 else {
-//                   return AuthPage();
-//               }}
-//             ),
-//         )
-//       ),
-//     );
-//   }
-
-//   Future signIn() async{
-//     await FirebaseAuth.instance.signInWithEmailAndPassword(
-//       email: emailController.text.trim(),
-//       password: passwordController.text.trim(), 
-//     );
-//   }
-// }
-

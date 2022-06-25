@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:awal/bottomadmin.dart';
-import 'package:awal/profileadmin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class TambahMobil2 extends StatefulWidget {
-  const TambahMobil2({ Key? key }) : super(key: key);
-  
+  const TambahMobil2({Key? key}) : super(key: key);
+
   @override
   State<TambahMobil2> createState() => _TambahMobil2State();
 }
@@ -29,83 +28,83 @@ class _TambahMobil2State extends State<TambahMobil2> {
 
   CollectionReference ref = FirebaseFirestore.instance.collection('cars2');
 
-Future openCamera() async {
-  final pickedImage =
-      await ImagePicker().pickImage(source: ImageSource.camera);
-  image = File(pickedImage!.path);
-  final file = File(pickedImage.path);
-  final imageName = '${DateTime.now().millisecondsSinceEpoch}.png';
-  final firebaseStorageRef = FirebaseStorage.instance
-        .ref()
-        .child('images/$imageName');
-  final uploadTask = firebaseStorageRef.putFile(file);
-  final taskSnapshot = await uploadTask;
-  final _fileURL = await taskSnapshot.ref.getDownloadURL();
-  await FirebaseFirestore.instance.collection('cars2').add({
-    'Image': _fileURL,
-    'status': status,
-    'merk' : merk.text,
-    'tarif' : tarif.text,
-    'tahun' : tahun.text,
-    'transmisi' : transmisi.text,
-    'kapasitasmaks' : kapasitasmaks.text,
-    'torsimaks' : torsimaks.text,
-    'bahan' : bensin.text,
-    'silinder' : silinder.text,
-    'nopol' : nopol.text,
-    'kontak' : kontak.text
-    
+  Future openCamera() async {
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+    image = File(pickedImage!.path);
+    final file = File(pickedImage.path);
+    final imageName = '${DateTime.now().millisecondsSinceEpoch}.png';
+    final firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('images/$imageName');
+    final uploadTask = firebaseStorageRef.putFile(file);
+    final taskSnapshot = await uploadTask;
+    final _fileURL = await taskSnapshot.ref.getDownloadURL();
+    await FirebaseFirestore.instance.collection('cars2').add({
+      'Image': _fileURL,
+      'status': status,
+      'merk': merk.text,
+      'tarif': tarif.text,
+      'tahun': tahun.text,
+      'transmisi': transmisi.text,
+      'kapasitasmaks': kapasitasmaks.text,
+      'torsimaks': torsimaks.text,
+      'bahan': bensin.text,
+      'silinder': silinder.text,
+      'nopol': nopol.text,
+      'kontak': kontak.text
     });
-}
+  }
 
-Future openGallery() async {
-  final imageGallery =
-      await ImagePicker().pickImage(source: ImageSource.gallery);
-  image = File(imageGallery!.path);
-  final file = File(imageGallery.path);
-  final imageName = '${DateTime.now().millisecondsSinceEpoch}.png';
-  final firebaseStorageRef = FirebaseStorage.instance
-        .ref()
-        .child('images/$imageName');
-  final uploadTask = firebaseStorageRef.putFile(file);
-  final taskSnapshot = await uploadTask;
-  final _fileURL = await taskSnapshot.ref.getDownloadURL();
-  await FirebaseFirestore.instance.collection('cars2').add({
-    'Image': _fileURL,
-    'status': status,
-    'merk' : merk.text,
-    'tarif' : tarif.text,
-    'tahun' : tahun.text,
-    'transmisi' : transmisi.text,
-    'kapasitasmaks' : kapasitasmaks.text,
-    'torsimaks' : torsimaks.text,
-    'bahan' : bensin.text,
-    'silinder' : silinder.text,
-    'nopol' : nopol.text,
-    'kontak' : kontak.text
-    
+  Future openGallery() async {
+    final imageGallery =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    image = File(imageGallery!.path);
+    final file = File(imageGallery.path);
+    final imageName = '${DateTime.now().millisecondsSinceEpoch}.png';
+    final firebaseStorageRef =
+        FirebaseStorage.instance.ref().child('images/$imageName');
+    final uploadTask = firebaseStorageRef.putFile(file);
+    final taskSnapshot = await uploadTask;
+    final _fileURL = await taskSnapshot.ref.getDownloadURL();
+    await FirebaseFirestore.instance.collection('cars2').add({
+      'Image': _fileURL,
+      'status': status,
+      'merk': merk.text,
+      'tarif': tarif.text,
+      'tahun': tahun.text,
+      'transmisi': transmisi.text,
+      'kapasitasmaks': kapasitasmaks.text,
+      'torsimaks': torsimaks.text,
+      'bahan': bensin.text,
+      'silinder': silinder.text,
+      'nopol': nopol.text,
+      'kontak': kontak.text
     });
-}
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          toolbarHeight: 70,
-          title: Text('Mobil Baru', style: TextStyle(color: Colors.black),),
-          centerTitle: true,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
-                gradient: LinearGradient(
-                    colors: [Colors.blueAccent,Colors.white],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter
-                )
-            ),
-          ),
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        toolbarHeight: 70,
+        title: Text(
+          'Mobil Baru',
+          style: TextStyle(color: Colors.black),
         ),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20)),
+              gradient: LinearGradient(
+                  colors: [Colors.blueAccent, Colors.white],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter)),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(10),
         child: ListView(
@@ -126,53 +125,56 @@ Future openGallery() async {
                           : SizedBox(
                               width: 150,
                               height: 100,
-                              child: IconButton(onPressed: (){
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: ((builder) => Container(
-                                        height: 100,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 20),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Pilih gambar dari',
-                                              style: TextStyle(fontSize: 20),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                            IconButton(
-                                              icon: Icon(Icons.camera),
-                                              onPressed: () {
-                                                openCamera();
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                            IconButton(
-                                              icon: Icon(Icons.image),
-                                              onPressed: () {
-                                                openGallery();
-                                                Navigator.pop(context);
-                                              },
-                                              )
-                                            ],
-                                          )
-                                          ],
-                                        ))));
-                              }, icon: Icon(Icons.add))
-                              
-                            ),
-                            
-                        Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                              child: IconButton(
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                        context: context,
+                                        builder: ((builder) => Container(
+                                            height: 100,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 20),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Pilih gambar dari',
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                                SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    IconButton(
+                                                      icon: Icon(Icons.camera),
+                                                      onPressed: () {
+                                                        openCamera();
+                                                        Navigator.pop(context);
+                                                      },
+                                                    ),
+                                                    IconButton(
+                                                      icon: Icon(Icons.image),
+                                                      onPressed: () {
+                                                        openGallery();
+                                                        Navigator.pop(context);
+                                                      },
+                                                    )
+                                                  ],
+                                                )
+                                              ],
+                                            ))));
+                                  },
+                                  icon: Icon(Icons.add))),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Merk',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Merk',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -181,18 +183,18 @@ Future openGallery() async {
                           controller: merk,
                           // controller: _alamat,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                        Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Tarif',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Tarif',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -202,18 +204,18 @@ Future openGallery() async {
                           // controller: _durasi,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                                            Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Tahun',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Tahun',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -222,18 +224,18 @@ Future openGallery() async {
                           controller: tahun,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                                                                  Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Nomor',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Nomor',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -241,37 +243,18 @@ Future openGallery() async {
                         child: TextField(
                           controller: nopol,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                      //                       Container(
-                      //   padding: EdgeInsets.only(left: 13.0, right:9.0),
-                      //   alignment: Alignment.topLeft,
-                      //   child:Text('Tipe Mesin',style: TextStyle(fontWeight: FontWeight.w800)),
-                      // ),
-                      // Container(
-                      //   height: 30,
-                      //   width: 380,
-                      //   child: TextField(
-                      //     controller: controllerKapasitasmaks,
-                      //     decoration: InputDecoration(
-                      //       fillColor: Color.fromARGB(255, 175, 175, 175),
-                      //       filled: true,
-                      //       border: OutlineInputBorder(
-                      //         borderRadius: BorderRadius.circular(20),
-                      //         borderSide: BorderSide(color: Colors.black))
-                      //     ),
-                      //   ),
-                      // ),
-                                            Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Kapasitas Maksimal',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Kapasitas Maksimal',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -279,18 +262,18 @@ Future openGallery() async {
                         child: TextField(
                           controller: kapasitasmaks,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                                            Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Bahan Bakar',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Bahan Bakar',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -298,18 +281,18 @@ Future openGallery() async {
                         child: TextField(
                           controller: bensin,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                                            Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Silinder',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Silinder',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -317,18 +300,18 @@ Future openGallery() async {
                         child: TextField(
                           controller: silinder,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                                            Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Transmisi',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Transmisi',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -336,18 +319,18 @@ Future openGallery() async {
                         child: TextField(
                           controller: transmisi,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                                            Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                      Container(
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Torsi Maksimal',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Torsi Maksimal',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -355,18 +338,18 @@ Future openGallery() async {
                         child: TextField(
                           controller: torsimaks,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 13.0, right:9.0),
+                        padding: EdgeInsets.only(left: 13.0, right: 9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Contact Person',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child: Text('Contact Person',
+                            style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
                         height: 30,
@@ -374,40 +357,33 @@ Future openGallery() async {
                         child: TextField(
                           controller: kontak,
                           decoration: InputDecoration(
-                            fillColor: Color.fromARGB(255, 175, 175, 175),
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(color: Colors.black))
-                          ),
+                              fillColor: Color.fromARGB(255, 175, 175, 175),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                  borderSide: BorderSide(color: Colors.black))),
                         ),
                       ),
-                        SizedBox(height: 50,),
-
-                        ElevatedButton(onPressed: () {
-              //               ref.add({
-                              
-              //                 'status': status,
-              //                 'merk' : merk.text,
-              //                 'tarif' : tarif.text,
-              //                 'tahun' : tahun.text,
-              //                 'transmisi' : transmisi.text,
-              //                 'kapasitasmaks' : kapasitasmaks.text,
-              //                 'torsimaks' : torsimaks.text,
-              //                 'alamatsewa' : alamatsewa.text,
-              //                 'silinder' : silinder.text,
-              //                 'nopol' : nopol.text
-              // }).whenComplete(() 
-              {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => BottomAdminPage()));
-              };
-            },
-                        
-                        child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)
-                      
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => BottomAdminPage()));
+                          }
+                          ;
+                        },
+                        child: Text(
+                          'NEXT',
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                      )
                     ]),
-                    
                   ),
                 ],
               ),
@@ -418,22 +394,3 @@ Future openGallery() async {
     );
   }
 }
-_showDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Text("Mobil berhasil ditambahkan"),
-            actions: <Widget>[
-              new ElevatedButton(
-                child: new Text("OK"),
-                onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context){
-                                          return ProfileadminPage();
-                                        }));
-                },
-              ),
-            ],
-          );
-        });
-  }

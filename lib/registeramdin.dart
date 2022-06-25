@@ -1,13 +1,12 @@
-import 'package:awal/bottom.dart';
 import 'package:awal/masukadmin.dart';
-import 'package:awal/profileadmin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class RegistrationAdmin extends StatefulWidget {
-  const RegistrationAdmin({Key? key, required void Function() onClickedSignUp}) : super(key: key);
+  const RegistrationAdmin({Key? key, required void Function() onClickedSignUp})
+      : super(key: key);
 
   @override
   _RegistrationAdminState createState() => _RegistrationAdminState();
@@ -15,14 +14,10 @@ class RegistrationAdmin extends StatefulWidget {
 
 class _RegistrationAdminState extends State<RegistrationAdmin> {
   final _auth = FirebaseAuth.instance;
-  
-  // string for displaying the error Message
+
   String? errorMessage;
 
-
-  // our form key
   final _formKey = GlobalKey<FormState>();
-  // editing Controller
   final NameEditingController = new TextEditingController();
   final AlamatEditingController = new TextEditingController();
   final NomorEditingController = new TextEditingController();
@@ -32,7 +27,6 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
 
   @override
   Widget build(BuildContext context) {
-    //first name field
     final NameField = TextFormField(
         autofocus: false,
         controller: NameEditingController,
@@ -59,8 +53,6 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
             borderRadius: BorderRadius.circular(10),
           ),
         ));
-
-    //alamat field
     final AlamatField = TextFormField(
         autofocus: false,
         controller: AlamatEditingController,
@@ -76,16 +68,14 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
+          prefixIcon: Icon(Icons.home),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Alamat",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
-    
-    //Nomor
-        final NomorField = TextFormField(
+    final NomorField = TextFormField(
         autofocus: false,
         controller: NomorEditingController,
         keyboardType: TextInputType.phone,
@@ -100,14 +90,13 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.account_circle),
+          prefixIcon: Icon(Icons.phone),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Nomor",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ));
-    //email field
     final emailField = TextFormField(
         autofocus: false,
         controller: emailEditingController,
@@ -116,7 +105,6 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
           if (value!.isEmpty) {
             return ("Please Enter Your Email");
           }
-          // reg expression for email validation
           if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
               .hasMatch(value)) {
             return ("Please Enter a valid email");
@@ -135,8 +123,6 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
             borderRadius: BorderRadius.circular(10),
           ),
         ));
-
-    //password field
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordEditingController,
@@ -162,8 +148,6 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
             borderRadius: BorderRadius.circular(10),
           ),
         ));
-
-    //confirm password field
     final confirmPasswordField = TextFormField(
         autofocus: false,
         controller: confirmPasswordEditingController,
@@ -188,7 +172,6 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
           ),
         ));
 
-    //signup button
     final signUpButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
@@ -213,9 +196,8 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.red),
+          icon: Icon(Icons.arrow_back, color: Color.fromARGB(255, 0, 20, 77)),
           onPressed: () {
-            // passing this to our root
             Navigator.of(context).pop();
           },
         ),
@@ -262,6 +244,7 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
       ),
     );
   }
+
   void signUp(String email, String password) async {
     if (_formKey.currentState!.validate()) {
       try {
@@ -299,17 +282,13 @@ class _RegistrationAdminState extends State<RegistrationAdmin> {
       }
     }
   }
-  postDetailsToFirestore() async {
-    // calling our firestore
-    // calling our user model
-    // sedning these values
 
+  postDetailsToFirestore() async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
     UserModel userModel = UserModel();
 
-    // writing all the values
     userModel.email = user!.email;
     userModel.uid = user.uid;
     userModel.Name = NameEditingController.text;
@@ -336,8 +315,6 @@ class UserModel {
   String? Alamat;
   String? Nomor;
   UserModel({this.uid, this.email, this.Name, this.Alamat, this.Nomor});
-
-  // receiving data from server
   factory UserModel.fromMap(map) {
     return UserModel(
       uid: map['uid'],
@@ -347,8 +324,6 @@ class UserModel {
       Nomor: map['Nomor'],
     );
   }
-
-  // sending data to our server
   Map<String, dynamic> toMap() {
     return {
       'uid': uid,
@@ -359,155 +334,3 @@ class UserModel {
     };
   }
 }
-// import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(const RegisterAdminPage());
-// }
-
-// class RegisterAdminPage extends StatelessWidget {
-//   const RegisterAdminPage({Key? key}) : super(key: key);
-
-
-//   @override
-//   Widget build(BuildContext context) {
-//     var white;
-//     return MaterialApp(
-//       title: 'profile',
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: IconButton(
-//             onPressed: (){
-//               Navigator.pop(context);
-//             }, icon: Icon(Icons.arrow_back_ios_new_outlined),
-//           // KURANG BOTTOOM !!
-//         ),
-//         ),
-//         body: SafeArea(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             children:<Widget>[
-//                   Container(
-//                     height: 80,
-//                     alignment: Alignment.topCenter,
-//                     child: Text
-//                     ('Daftar Admin', style: TextStyle(fontSize: 40,fontWeight: FontWeight.w900)
-//                     ,)
-//                   ),
-//                   Container(
-//                     padding: EdgeInsets.only(left: 13.0, right:9.0),
-//                     alignment: Alignment.topLeft,
-//                     child:Text('Nama',style: TextStyle(fontWeight: FontWeight.w800)),
-//                   ),
-//                   Container(
-//                     height: 70,
-//                     width: 380,
-//                     child: TextField(
-//                       decoration: InputDecoration(
-//                         hintText: 'Nama',
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(20),
-//                           borderSide: BorderSide(color: Colors.black))
-//                       ),
-//                     ),
-//                   ),
-//                   Container(
-//                     padding: EdgeInsets.only(left: 13.0, right:9.0),
-//                     alignment: Alignment.topLeft,
-//                     child:Text('Email',style: TextStyle(fontWeight: FontWeight.w800)),
-//                   ),
-//                   Container(
-//                     height: 70,
-//                     width: 380,
-//                     child: TextField(
-//                       decoration: InputDecoration(
-//                         hintText: 'email',
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(20),
-//                           borderSide: BorderSide(color: Colors.black))
-//                       ),
-//                     ),
-//                   ),
-//                   Container(
-//                     padding: EdgeInsets.only(left: 13.0, right:9.0),
-//                     alignment: Alignment.topLeft,
-//                     child:Text('Password',style: TextStyle(fontWeight: FontWeight.w800)),
-//                   ),
-//                   Container(
-//                     height: 70,
-//                     width: 380,
-//                     child: TextField(
-//                       decoration: InputDecoration(
-//                         hintText: 'Password',
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(20),
-//                           borderSide: BorderSide(color: Colors.black))
-//                       ),
-//                     ),
-//                   ),
-//                   Container(
-//                     padding: EdgeInsets.only(left: 13.0, right:9.0),
-//                     alignment: Alignment.topLeft,
-//                     child:Text('No.Handphone',style: TextStyle(fontWeight: FontWeight.w800)),
-//                   ),
-//                   Container(
-//                     height: 70,
-//                     width: 380,
-//                     child: TextField(
-//                       decoration: InputDecoration(
-//                         hintText: 'No.Handphone',
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(20),
-//                           borderSide: BorderSide(color: Colors.black))
-//                       ),
-//                     ),
-//                   ),
-//                   Container(
-//                     padding: EdgeInsets.only(left: 13.0, right:9.0),
-//                     alignment: Alignment.topLeft,
-//                     child:Text('Alamat Penyewaan',style: TextStyle(fontWeight: FontWeight.w800)),
-//                   ),
-//                  Container(
-//                     height: 70,
-//                     width: 380,
-//                     child: TextField(
-//                       decoration: InputDecoration(
-//                         hintText: 'Alamat Penyewaan',
-//                         border: OutlineInputBorder(
-//                           borderRadius: BorderRadius.circular(20),
-//                           borderSide: BorderSide(color: Colors.black))
-//                       ),
-//                     ),
-//                   ),
-//                    Container(
-//                     padding: EdgeInsets.only(left: 13.0, right:9.0),
-//                     alignment: Alignment.topLeft,
-//                     child:
-//                       Text('Kartu Tanda Penduduk',style: TextStyle(fontWeight: FontWeight.w800)),
-//                     // KURANG ICON DROBBOX
-//                   ),
-//                   Container(
-//                     alignment: Alignment.topCenter,
-//                     color:Color.fromARGB(255, 187, 185, 180),
-//                     height: 30,
-//                     width: 150,
-//                     child: Icon(Icons.upload,size: 30,),
-//                   ),
-                  
-//                     SizedBox(height: 50,),
-//                     ElevatedButton(onPressed: () {
-                      
-//                     }, 
-//                     child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)
-                    
-                  
-
-                  
-//             ],
-//             )
-//         ),
-//       ),
-//     );
-//   }
-// }
-
