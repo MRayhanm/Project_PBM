@@ -45,9 +45,9 @@ class RiwayatadminPage extends StatelessWidget {
                             alignment: Alignment.topRight,
                             child:IconButton(
                                     onPressed: () {                      
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return MapSample();
-                      }));
+                      //     Navigator.push(context, MaterialPageRoute(builder: (context){
+                      //     return MapSample();
+                      // }));
                         },
                                     icon: Icon(Icons.delete), ),
                           ),

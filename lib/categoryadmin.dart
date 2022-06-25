@@ -1,21 +1,14 @@
-import 'package:awal/bottom.dart';
-import 'package:awal/list_car_user2.dart';
-import 'package:awal/list_car_user6.dart';
+import 'package:awal/cameraprev.dart';
+import 'package:awal/cameraprev2.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const CategoryPage());
-}
-int _selectedIndex = 1;
-class CategoryPage extends StatelessWidget {
-  const CategoryPage({Key? key}) : super(key: key);
+class CategoryAdmin extends StatelessWidget {
+  const CategoryAdmin({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           toolbarHeight: 70,
@@ -34,20 +27,21 @@ class CategoryPage extends StatelessWidget {
             ),
           ),
         ),
-        body: Center(
+              body: Center(
           child: Column(
             children: [
-              SizedBox(
-                height: 20,
+              Container(
+                height: 115,
+                color: Color.fromARGB(255, 245, 245, 245),
               ),
               Container(
                 color: const Color.fromARGB(255, 245, 245, 245),
                 alignment: Alignment.center,
-                child: Text("Kategori Mobil",
+                child: Text("Tambah Mobil Baru",
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.w300),),
               ),
               Container(
-                  height: 550,
+                  height: 455,
                   width: 500,
                   decoration: BoxDecoration(
                   color: Color.fromARGB(255, 245, 245, 245)),
@@ -87,8 +81,8 @@ class CategoryPage extends StatelessWidget {
                                     height: 150,
                                     child: IconButton(
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                          return Carlist6Page();
+                                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                                          return TambahMobil2();
                                         }));
                                       },
                                       icon: Image.asset('assets/avanza2.jpg'),
@@ -135,8 +129,8 @@ class CategoryPage extends StatelessWidget {
                                     height: 150,
                                     child: IconButton(
                                       onPressed: () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                          return Carlist4Page();
+                                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                                          return TambahPage();
                                         }));
                                       },
                                       icon: Image.asset('assets/brio.jpg'),
@@ -157,31 +151,6 @@ class CategoryPage extends StatelessWidget {
             ]),
         
         ),
-      //   bottomNavigationBar: BottomNavigationBar(
-      //   items: const [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.history),
-      //       label: 'Riawayat',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.map_outlined),
-      //       label: 'Maps',
-      //     ),
-      //      BottomNavigationBarItem(
-      //       icon: Icon(Icons.account_circle),
-      //       label: 'Profile',
-      //     ),
-      //   ],
-      //   currentIndex: 0,
-      //   selectedItemColor: Colors.blue,
-      //   unselectedItemColor: Color.fromARGB(255, 0, 14, 26),
-      //   showUnselectedLabels: true,
-      //  ),
-      ),
     );
   }
 }

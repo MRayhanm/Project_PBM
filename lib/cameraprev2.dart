@@ -6,14 +6,14 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class TambahPage extends StatefulWidget {
-  const TambahPage({ Key? key }) : super(key: key);
+class TambahMobil2 extends StatefulWidget {
+  const TambahMobil2({ Key? key }) : super(key: key);
   
   @override
-  State<TambahPage> createState() => _TambahPageState();
+  State<TambahMobil2> createState() => _TambahMobil2State();
 }
 
-class _TambahPageState extends State<TambahPage> {
+class _TambahMobil2State extends State<TambahMobil2> {
   File? image;
   TextEditingController merk = TextEditingController();
   TextEditingController tarif = TextEditingController();
@@ -27,7 +27,7 @@ class _TambahPageState extends State<TambahPage> {
   TextEditingController kontak = TextEditingController();
   final status = 'Tersedia';
 
-  CollectionReference ref = FirebaseFirestore.instance.collection('cars');
+  CollectionReference ref = FirebaseFirestore.instance.collection('cars2');
 
 Future openCamera() async {
   final pickedImage =
@@ -41,7 +41,7 @@ Future openCamera() async {
   final uploadTask = firebaseStorageRef.putFile(file);
   final taskSnapshot = await uploadTask;
   final _fileURL = await taskSnapshot.ref.getDownloadURL();
-  await FirebaseFirestore.instance.collection('cars').add({
+  await FirebaseFirestore.instance.collection('cars2').add({
     'Image': _fileURL,
     'status': status,
     'merk' : merk.text,
@@ -70,7 +70,7 @@ Future openGallery() async {
   final uploadTask = firebaseStorageRef.putFile(file);
   final taskSnapshot = await uploadTask;
   final _fileURL = await taskSnapshot.ref.getDownloadURL();
-  await FirebaseFirestore.instance.collection('cars').add({
+  await FirebaseFirestore.instance.collection('cars2').add({
     'Image': _fileURL,
     'status': status,
     'merk' : merk.text,
@@ -417,61 +417,6 @@ Future openGallery() async {
       ),
     );
   }
-//   Future createCars(Cars cars) async{
-//     final docUser = FirebaseFirestore.instance.collection('cars').doc();
-//     cars.id = docUser.id;
-//     final json = cars.toJson();
-//     await docUser.set(json);
-//   }
-// }
-// class Cars{
-//   String id;
-//   final String merk;
-//   final int tarif;
-//   final int tahun;
-//   final String transmisi;
-//   final String kapasitasmaks;
-//   final int torsimaks;
-//   final String alamatsewa;
-//   final String silinder;
-
-//   Cars({
-//     this.id = '',
-//     required this.merk,
-//     required this.tarif,
-//     required this.tahun,
-//     required this.transmisi,
-//     required this.kapasitasmaks,
-//     required this.torsimaks,
-//     required this.alamatsewa,
-//     required this.silinder,
-//   });
-
-//   Map<String, dynamic> toJson() => {
-//     'id' : id,
-//     'merk' : merk,
-//     'tarif' : tarif,
-//     'tahun' : tahun,
-//     'transmisi' : transmisi,
-//     'kapasitasmaks' : kapasitasmaks,
-//     'torsimaks' : torsimaks,
-//     'alamatsewa' : alamatsewa,
-//     'silinder' : silinder
-//     ,
-//   };
-
-//   static Cars fromJson(Map<String, dynamic>json) => Cars(
-//     merk: json['merk'], 
-//     tarif: json['tarif'], 
-//     tahun: json['tahun'],
-//     transmisi: json['transmisi'],
-//     kapasitasmaks: json['kapasitasmaks'],
-//     torsimaks: json['torsimaks'],
-//     alamatsewa: json['alamatsewa'],
-//     silinder: json['silinder'],
-//     );
-
-//   static map(Widget Function(Cars cars) buildCars) {}
 }
 _showDialog(BuildContext context) {
     return showDialog(

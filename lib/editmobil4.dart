@@ -1,20 +1,18 @@
-import 'dart:io';
-import 'package:awal/bottomadmin.dart';
-import 'package:awal/profileadmin.dart';
+import 'package:awal/Pesananadmin.dart';
+import 'package:awal/mobil4admin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
-class TambahPage extends StatefulWidget {
-  const TambahPage({ Key? key }) : super(key: key);
-  
+class EditMobil4 extends StatefulWidget {
+  DocumentSnapshot docid;
+  EditMobil4({required this.docid});
+
   @override
-  State<TambahPage> createState() => _TambahPageState();
+  _EditMobil4State createState() => _EditMobil4State();
 }
 
-class _TambahPageState extends State<TambahPage> {
-  File? image;
+class _EditMobil4State extends State<EditMobil4> {
   TextEditingController merk = TextEditingController();
   TextEditingController tarif = TextEditingController();
   TextEditingController tahun = TextEditingController();
@@ -25,162 +23,97 @@ class _TambahPageState extends State<TambahPage> {
   TextEditingController silinder = TextEditingController();
   TextEditingController nopol = TextEditingController();
   TextEditingController kontak = TextEditingController();
-  final status = 'Tersedia';
+  final status = 'Dalam Penyewaan';
 
-  CollectionReference ref = FirebaseFirestore.instance.collection('cars');
+  @override
+  void initState() {
+    // mobil = TextEditingController(text: widget.docid.get('mobil'));
+    // nopol = TextEditingController(text: widget.docid.get('nopol'));
+    // atasnama = TextEditingController(text: widget.docid.get('atasnama'));
+    // nomor = TextEditingController(text: widget.docid.get('nomor'));
+    // tujuan = TextEditingController(text: widget.docid.get('tujuan'));
+    // kembali = TextEditingController(text: widget.docid.get('kembali'));
+    // status = TextEditingController(text: widget.docid.get('status'));
+    // cdate = TextEditingController(text: widget.docid.get('tanggal'));
 
-Future openCamera() async {
-  final pickedImage =
-      await ImagePicker().pickImage(source: ImageSource.camera);
-  image = File(pickedImage!.path);
-  final file = File(pickedImage.path);
-  final imageName = '${DateTime.now().millisecondsSinceEpoch}.png';
-  final firebaseStorageRef = FirebaseStorage.instance
-        .ref()
-        .child('images/$imageName');
-  final uploadTask = firebaseStorageRef.putFile(file);
-  final taskSnapshot = await uploadTask;
-  final _fileURL = await taskSnapshot.ref.getDownloadURL();
-  await FirebaseFirestore.instance.collection('cars').add({
-    'Image': _fileURL,
-    'status': status,
-    'merk' : merk.text,
-    'tarif' : tarif.text,
-    'tahun' : tahun.text,
-    'transmisi' : transmisi.text,
-    'kapasitasmaks' : kapasitasmaks.text,
-    'torsimaks' : torsimaks.text,
-    'bahan' : bensin.text,
-    'silinder' : silinder.text,
-    'nopol' : nopol.text,
-    'kontak' : kontak.text
-    
-    });
-}
+    super.initState();
+  }
 
-Future openGallery() async {
-  final imageGallery =
-      await ImagePicker().pickImage(source: ImageSource.gallery);
-  image = File(imageGallery!.path);
-  final file = File(imageGallery.path);
-  final imageName = '${DateTime.now().millisecondsSinceEpoch}.png';
-  final firebaseStorageRef = FirebaseStorage.instance
-        .ref()
-        .child('images/$imageName');
-  final uploadTask = firebaseStorageRef.putFile(file);
-  final taskSnapshot = await uploadTask;
-  final _fileURL = await taskSnapshot.ref.getDownloadURL();
-  await FirebaseFirestore.instance.collection('cars').add({
-    'Image': _fileURL,
-    'status': status,
-    'merk' : merk.text,
-    'tarif' : tarif.text,
-    'tahun' : tahun.text,
-    'transmisi' : transmisi.text,
-    'kapasitasmaks' : kapasitasmaks.text,
-    'torsimaks' : torsimaks.text,
-    'bahan' : bensin.text,
-    'silinder' : silinder.text,
-    'nopol' : nopol.text,
-    'kontak' : kontak.text
-    
-    });
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          toolbarHeight: 70,
-          title: Text('Mobil Baru', style: TextStyle(color: Colors.black),),
-          centerTitle: true,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
-                gradient: LinearGradient(
-                    colors: [Colors.blueAccent,Colors.white],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter
-                )
-            ),
-          ),
-        ),
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: ListView(
-          children: [
-            Center(
-              child: Stack(
-                children: [
-                  Container(
-                    child: Column(children: [
-                      image != null
-                          ? ClipOval(
-                              child: Image.file(
-                              image!,
-                              width: 150,
-                              height: 150,
-                              fit: BoxFit.cover,
-                            ))
-                          : SizedBox(
-                              width: 150,
-                              height: 100,
-                              child: IconButton(onPressed: (){
-                                showModalBottomSheet(
-                                    context: context,
-                                    builder: ((builder) => Container(
-                                        height: 100,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 20),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Pilih gambar dari',
-                                              style: TextStyle(fontSize: 20),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                            ),
-                                            Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                            IconButton(
-                                              icon: Icon(Icons.camera),
-                                              onPressed: () {
-                                                openCamera();
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                            IconButton(
-                                              icon: Icon(Icons.image),
-                                              onPressed: () {
-                                                openGallery();
-                                                Navigator.pop(context);
-                                              },
-                                              )
-                                            ],
-                                          )
-                                          ],
-                                        ))));
-                              }, icon: Icon(Icons.add))
-                              
-                            ),
-                            
+      // appBar: AppBar(
+      //   actions: [
+      //     MaterialButton(
+      //       onPressed: () {
+      //         widget.docid.reference.update({
+      //             'status': status,
+      //             'merk' : merk.text,
+      //             'tarif' : tarif.text,
+      //             'tahun' : tahun.text,
+      //             'transmisi' : transmisi.text,
+      //             'kapasitasmaks' : kapasitasmaks.text,
+      //             'torsimaks' : torsimaks.text,
+      //             'alamatsewa' : alamatsewa.text,
+      //             'silinder' : silinder.text,
+      //             'nopol' : nopol.text
+      //         }).whenComplete(() {
+      //           Navigator.pushReplacement(
+      //               context, MaterialPageRoute(builder: (_) => PesananPage()));
+      //         });
+      //       },
+      //       child: Text("save"),
+      //     ),
+      //     MaterialButton(
+      //       onPressed: () {
+      //         widget.docid.reference.delete().whenComplete(() {
+      //           Navigator.pushReplacement(
+      //               context, MaterialPageRoute(builder: (_) => PesananPage()));
+      //         });
+      //       },
+      //       child: Text("delete"),
+      //     ),
+      //   ],
+      // ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  color: Color.fromARGB(255, 245, 245, 245),
+                  child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      children: [
                         Container(
+                          height: 150,
+                          width: 180,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: NetworkImage(widget.docid.get('Image')),
+                              fit: BoxFit.fill,
+                              )
+                              
+                          ),
+                          // child: Image.network(widget.docid.get('Image')),
+                          
+                        ),
+                        SizedBox(height: 7),
+                                                Container(
                         padding: EdgeInsets.only(left: 13.0, right:9.0),
                         alignment: Alignment.topLeft,
                         child:Text('Merk',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: merk,
                           // controller: _alamat,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('merk'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -195,13 +128,14 @@ Future openGallery() async {
                         child:Text('Tarif',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: tarif,
                           // controller: _durasi,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('tarif'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -216,12 +150,13 @@ Future openGallery() async {
                         child:Text('Tahun',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: tahun,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('tahun'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -233,14 +168,16 @@ Future openGallery() async {
                                                                   Container(
                         padding: EdgeInsets.only(left: 13.0, right:9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Nomor',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child:Text('Nomor Polisi',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: nopol,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('nopol'),
+                            hintStyle: TextStyle(fontSize: 13,),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -274,11 +211,12 @@ Future openGallery() async {
                         child:Text('Kapasitas Maksimal',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: kapasitasmaks,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('kapasitasmaks'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -293,11 +231,12 @@ Future openGallery() async {
                         child:Text('Bahan Bakar',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: bensin,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('bahan'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -317,6 +256,7 @@ Future openGallery() async {
                         child: TextField(
                           controller: silinder,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('silinder'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -328,14 +268,17 @@ Future openGallery() async {
                                             Container(
                         padding: EdgeInsets.only(left: 13.0, right:9.0),
                         alignment: Alignment.topLeft,
+                        
                         child:Text('Transmisi',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
+                        alignment: Alignment.bottomCenter,
                         child: TextField(
                           controller: transmisi,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('transmisi'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -350,11 +293,12 @@ Future openGallery() async {
                         child:Text('Torsi Maksimal',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: torsimaks,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('torsimaks'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -366,14 +310,15 @@ Future openGallery() async {
                       Container(
                         padding: EdgeInsets.only(left: 13.0, right:9.0),
                         alignment: Alignment.topLeft,
-                        child:Text('Contact Person',style: TextStyle(fontWeight: FontWeight.w800)),
+                        child:Text('Nomor',style: TextStyle(fontWeight: FontWeight.w800)),
                       ),
                       Container(
-                        height: 30,
+                        height: 35,
                         width: 380,
                         child: TextField(
                           controller: kontak,
                           decoration: InputDecoration(
+                            hintText: widget.docid.get('kontak'),
                             fillColor: Color.fromARGB(255, 175, 175, 175),
                             filled: true,
                             border: OutlineInputBorder(
@@ -382,113 +327,132 @@ Future openGallery() async {
                           ),
                         ),
                       ),
-                        SizedBox(height: 50,),
-
-                        ElevatedButton(onPressed: () {
-              //               ref.add({
-                              
-              //                 'status': status,
-              //                 'merk' : merk.text,
-              //                 'tarif' : tarif.text,
-              //                 'tahun' : tahun.text,
-              //                 'transmisi' : transmisi.text,
-              //                 'kapasitasmaks' : kapasitasmaks.text,
-              //                 'torsimaks' : torsimaks.text,
-              //                 'alamatsewa' : alamatsewa.text,
-              //                 'silinder' : silinder.text,
-              //                 'nopol' : nopol.text
-              // }).whenComplete(() 
-              {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => BottomAdminPage()));
-              };
-            },
-                        
-                        child: Text('NEXT',style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),)
-                      
-                    ]),
-                    
+                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 255, 255, 255),
+                        onPrimary: Colors.black,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                                
+                              )
+                            ),
+                      onPressed: (){
+                        widget.docid.reference.update({                              
+                            'merk' : merk.text,
+                            'tarif' : tarif.text,
+                            'tahun' : tahun.text,
+                            'transmisi' : transmisi.text,
+                            'kapasitasmaks' : kapasitasmaks.text,
+                            'torsimaks' : torsimaks.text,
+                            'bahan' : bensin.text,
+                            'silinder' : silinder.text,
+                            'nopol' : nopol.text,
+                            'kontak' : kontak.text
+                        }).whenComplete(() {
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(builder: (_) => MobilKecilPage()));
+                        });
+                      }, 
+                      child: Container(
+                      padding: EdgeInsets.only(left:7, right:0),
+                      height:20,
+                      alignment: Alignment.center,
+                      child: Text("Ubah Data",
+                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700,),),
+                    ),
+                      ),
+                        SizedBox(height: 6,),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 55, 255, 139),
+                        onPrimary: Colors.black,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                                
+                              )
+                            ),
+                      onPressed: (){
+                        widget.docid.reference.update({
+                          'status' : 'Dalam Penyewaan',
+                        }).whenComplete(() {
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(builder: (_) => MobilKecilPage()));
+                        });
+                      }, 
+                      child: Container(
+                      padding: EdgeInsets.only(left:7, right:0),
+                      height:20,
+                      alignment: Alignment.center,
+                      child: Text("Sewakan Mobil",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,),),
+                    ),
+                      ),
+                      SizedBox(height: 3,),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        primary: Color.fromARGB(255, 212, 14, 14),
+                        onPrimary: Colors.black,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                                
+                              )
+                            ),
+                      onPressed: (){
+                        widget.docid.reference.update({
+                          'status' : 'Tersedia',
+                        }).whenComplete(() {
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(builder: (_) => MobilKecilPage()));
+                        });
+                      }, 
+                      child: Container(
+                      padding: EdgeInsets.only(left:7, right:0),
+                      height:20,
+                      alignment: Alignment.center,
+                      child: Text("Mobil Dikembalikan",
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),),
+                    ),
+                      ),
+                                              ],
+                                            ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
+              SizedBox(height: 3,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 0, right:0),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Status  :  ',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w800, fontSize: 18),
+                                      ),
+                                      Text(
+                                        widget.docid.get('status'),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w800, fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+            ],
+          ),
     );
   }
-//   Future createCars(Cars cars) async{
-//     final docUser = FirebaseFirestore.instance.collection('cars').doc();
-//     cars.id = docUser.id;
-//     final json = cars.toJson();
-//     await docUser.set(json);
-//   }
-// }
-// class Cars{
-//   String id;
-//   final String merk;
-//   final int tarif;
-//   final int tahun;
-//   final String transmisi;
-//   final String kapasitasmaks;
-//   final int torsimaks;
-//   final String alamatsewa;
-//   final String silinder;
-
-//   Cars({
-//     this.id = '',
-//     required this.merk,
-//     required this.tarif,
-//     required this.tahun,
-//     required this.transmisi,
-//     required this.kapasitasmaks,
-//     required this.torsimaks,
-//     required this.alamatsewa,
-//     required this.silinder,
-//   });
-
-//   Map<String, dynamic> toJson() => {
-//     'id' : id,
-//     'merk' : merk,
-//     'tarif' : tarif,
-//     'tahun' : tahun,
-//     'transmisi' : transmisi,
-//     'kapasitasmaks' : kapasitasmaks,
-//     'torsimaks' : torsimaks,
-//     'alamatsewa' : alamatsewa,
-//     'silinder' : silinder
-//     ,
-//   };
-
-//   static Cars fromJson(Map<String, dynamic>json) => Cars(
-//     merk: json['merk'], 
-//     tarif: json['tarif'], 
-//     tahun: json['tahun'],
-//     transmisi: json['transmisi'],
-//     kapasitasmaks: json['kapasitasmaks'],
-//     torsimaks: json['torsimaks'],
-//     alamatsewa: json['alamatsewa'],
-//     silinder: json['silinder'],
-//     );
-
-//   static map(Widget Function(Cars cars) buildCars) {}
 }
-_showDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: new Text("Mobil berhasil ditambahkan"),
-            actions: <Widget>[
-              new ElevatedButton(
-                child: new Text("OK"),
-                onPressed: () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context){
-                                          return ProfileadminPage();
-                                        }));
-                },
-              ),
-            ],
-          );
-        });
-  }
+
+                          

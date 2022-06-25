@@ -1,6 +1,7 @@
 import 'package:awal/admin.dart';
 import 'package:awal/login.dart';
 import 'package:awal/loginadmin.dart';
+import 'package:awal/profil.dart';
 import 'package:awal/register.dart';
 import 'package:awal/registeramdin.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class AdminPage extends StatelessWidget {
                             ),
                           ElevatedButton(onPressed: (() {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const RegisterAdminPage();
+                            return const ProfilPage();
                           }));
                         }), 
                                 style: ElevatedButton.styleFrom(

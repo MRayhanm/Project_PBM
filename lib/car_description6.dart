@@ -1,20 +1,21 @@
 import 'package:awal/home.dart';
 import 'package:awal/list_car_user2.dart';
+import 'package:awal/list_car_user6.dart';
 import 'package:awal/pembayaran.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
 
-class CarDescription4 extends StatefulWidget {
+class CarDescription6 extends StatefulWidget {
   DocumentSnapshot docid;
-  CarDescription4({required this.docid});
+  CarDescription6({required this.docid});
 
   @override
-  State<CarDescription4> createState() => _CarDescription4State();
+  State<CarDescription6> createState() => _CarDescription6State();
 }
 
-class _CarDescription4State extends State<CarDescription4> {
+class _CarDescription6State extends State<CarDescription6> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +28,7 @@ class _CarDescription4State extends State<CarDescription4> {
           leading: IconButton(
             onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Carlist4Page(),
+                builder: (context) => Carlist6Page(),
               ));
             },
             icon: Icon(Icons.arrow_back_ios_new_outlined)),
@@ -115,12 +116,14 @@ class _CarDescription4State extends State<CarDescription4> {
                                   Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Container(
+                                      height: 300,
                                       alignment: Alignment.center,
                                       child: Column(
                                         children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 30,right: 30),
                                           child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

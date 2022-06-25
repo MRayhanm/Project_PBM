@@ -1,6 +1,12 @@
+import 'package:awal/camerapage.dart';
+import 'package:awal/camerates.dart';
+import 'package:awal/camerateshome.dart';
 import 'package:awal/editprofil.dart';
 import 'package:awal/editprofiladmin.dart';
+import 'package:awal/kamerates.dart';
 import 'package:awal/konfirmasi.dart';
+import 'package:awal/register.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +21,21 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  String nama = 'Mohammad Rayhan';
-  String alamatrumah = 'Jember';
-  String nomor = '085123456789';
-  String Images = 'assets/pngegg.png';
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+    @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -44,11 +61,11 @@ class _ProfilPageState extends State<ProfilPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage(Images),
-                        backgroundColor: Colors.grey,
-                        radius: 65.0,
-                      ),
+                      // CircleAvatar(
+                      //   backgroundImage: AssetImage(),
+                      //   backgroundColor: Colors.grey,
+                      //   radius: 65.0,
+                      // ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(     
@@ -77,18 +94,13 @@ class _ProfilPageState extends State<ProfilPage> {
                                       child: Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
-                                          Text('Nama: ${nama}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
-                                          Text('Alamat: ${alamatrumah}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
-                                          Text('No.Handphone: ${nomor}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
+                                          Text("Nama : ${loggedInUser.Name}", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
+                                          Text("Alamat : ${loggedInUser.Alamat}", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
+                                          Text('No.Handphone: ${loggedInUser.Nomor}', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => EditprofilPage(
-                            nama: nama,
-                            alamatrumah: alamatrumah,
-                            nomor: nomor,
-                          ),
-                          ));
+                         Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => Kamera()));
                       }, 
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 0, 49, 88),

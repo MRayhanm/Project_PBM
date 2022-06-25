@@ -1,8 +1,15 @@
 import 'package:awal/Pesananadmin.dart';
 import 'package:awal/Riwayatcustomeradmin.dart';
 import 'package:awal/cameraprev.dart';
+import 'package:awal/cameraprev2.dart';
+import 'package:awal/categoryadmin.dart';
 import 'package:awal/editprofiladmin.dart';
 import 'package:awal/first_page.dart';
+import 'package:awal/mobil4admin.dart';
+import 'package:awal/mobil6admin.dart';
+import 'package:awal/penyewaan.dart';
+import 'package:awal/registeramdin.dart';
+import 'package:awal/riwayat.dart';
 import 'package:awal/tambahmobil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,32 +17,80 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 
-class ProfileadminPage extends StatelessWidget {
+class ProfileadminPage extends StatefulWidget {
 
+  @override
+  State<ProfileadminPage> createState() => _ProfileadminPageState();
+}
+
+class _ProfileadminPageState extends State<ProfileadminPage> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
+  Future<void> _signOut() async{
+    // final user = FirebaseAuth.instance.currentUser!;
+    // final _auth = FirebaseAuth.instance;
+    FirebaseAuth.instance.signOut();
+    final user = FirebaseAuth.instance.currentUser!;
+    runApp(
+      MaterialApp(
+        home: FirstPage(),
+      )
+    );
+  }
     return MaterialApp(
       title: 'Profile',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Profil'),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          toolbarHeight: 70,
+          title: IconButton(onPressed: (){}, 
+          icon: Image.asset('assets/logo2.png'),
+          iconSize: 185,),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+                gradient: LinearGradient(
+                    colors: [Colors.blueAccent,Colors.white],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter
+                )
+            ),
           ),
+        ),
         body: SafeArea(
           child: Column(
             children: <Widget>[
+              SizedBox(height: 25),
               Container(  
                 padding: EdgeInsets.only(left: 10,right: 0),
-                height: 181,
+                height: 134,
                 width: 340,
                 alignment: Alignment.centerLeft,
                 child: Column( 
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text("Email  : ${user.email!}",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
-                      Text("Nama  :",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
-                      Text("Alamat  :",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
-                      Text("Nomer WA  :",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
+                      Text("Nama  : ${loggedInUser.Name}",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
+                      Text("Alamat  : ${loggedInUser.Alamat}",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
+                      Text("No. Handphone  : ${loggedInUser.Nomor}",style: TextStyle(color: Color.fromARGB(255, 26, 105, 207)),),
                       
                     ],
                   ),
@@ -48,9 +103,9 @@ class ProfileadminPage extends StatelessWidget {
                      )]
                   ),
               ),
-              SizedBox(height: 5,),
+              SizedBox(height: 15,),
               Container( 
-                height: 150,
+                height: 60,
                 width: 170,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -63,32 +118,32 @@ class ProfileadminPage extends StatelessWidget {
                   child: Column(                   
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                       Row(
-                         children:[  
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.edit_note),                  
-                            ),
-                            Text('Edit Profil'),
-                         ]  
-                       ),
-                       Row(
-                         children:[  
-                            IconButton(
-                              onPressed: () {                      
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return const RiwayatadminPage();
-                      }));
-                        },
-                              icon: Icon(Icons.lock),                  
-                            ),
-                            Text('Ganti Password'),
-                         ]  
-                       ),
+                      //  Row(
+                      //    children:[  
+                      //       IconButton(
+                      //         onPressed: () {},
+                      //         icon: Icon(Icons.edit_note),                  
+                      //       ),
+                      //       Text('Edit Profil'),
+                      //    ]  
+                      //  ),
+                      //  Row(
+                      //    children:[  
+                      //       IconButton(
+                      //         onPressed: () {                      
+                      //     Navigator.push(context, MaterialPageRoute(builder: (context){
+                      //     return const RiwayatadminPage();
+                      // }));
+                      //   },
+                      //         icon: Icon(Icons.lock),                  
+                      //       ),
+                      //       Text('Ganti Password'),
+                      //    ]  
+                      //  ),
                       Row(
                          children:[  
                             IconButton(
-                              onPressed: () => FirebaseAuth.instance.signOut(),
+                              onPressed: () => _signOut(),
                               icon: Icon(Icons.logout, color: Colors.red,),                  
                             ),
                             Text('Keluar', style: TextStyle(color: Colors.red),),
@@ -96,66 +151,92 @@ class ProfileadminPage extends StatelessWidget {
                        ),
                     ],
                   )
-              ),              
+              ),  
               Container(
-                padding: EdgeInsets.only(left:7, right:0),
-                height:40,
-                alignment: Alignment.topLeft,
-                child: Text("Daftar Mobil",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),),
-              ),
-              StreamBuilder<List<Cars>>(
-                stream: readCars(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError){
-                    return Text('Error ${snapshot.error}');
-                  }
-                  else if (snapshot.hasData){
-                    final Cars = snapshot.data!;
-                  
-                  return Container(
-                    
-                    height: 280,
-                    color: Color.fromARGB(255, 245, 245, 245),
-                    child:ListView(
-                      children: Cars.map(buildCars).toList(),
+                height: 320,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                                
+                              )
+                            ),
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return MobilKecilPage();
+                      }));
+                      }, 
+                      child: Container(
+                      padding: EdgeInsets.only(left:7, right:0),
+                      height:50,
+                      alignment: Alignment.center,
+                      child: Text("Daftar Mobil 4 Kursi",
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
+                    ),
                       ),
-                    );
-                  }else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                }
-              ),
-                Container(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  height: 61,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        onPressed: (){                      
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return const PesananPage();
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                        shadowColor: Colors.black,
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                                
+                              )
+                            ),
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return MobilBesarPage();
                       }));
-                        },
-                        icon: Icon(Icons.add_chart)),
-                      IconButton(
-                        onPressed: (){                      
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return const TambahPage();
-                      }));
-                        },
-                        icon: Icon(Icons.add_circle,size: 50,color: Color.fromARGB(255, 0, 1, 8),)),
-                      IconButton(
-                        onPressed: (){                      
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return const RiwayatadminPage();
-                      }));
-                        },
-                        icon: Icon(Icons.history_outlined))
-                    ],
-                  ),
-                )
+                      }, 
+                      child: Container(
+                      padding: EdgeInsets.only(left:7, right:0),
+                      height:50,
+                      alignment: Alignment.center,
+                      child: Text("Daftar Mobil 6 Kursi",
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
+                    ),
+                      ),
+                  ],
+                ),
+              ),      
+
+                // Container(
+                //   color: Color.fromARGB(255, 255, 255, 255),
+                //   height: 61,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
+                //       IconButton(
+                //         onPressed: (){                      
+                //           Navigator.push(context, MaterialPageRoute(builder: (context){
+                //           return PesananPage();
+                //       }));
+                //         },
+                //         icon: Icon(Icons.add_chart)),
+                //       IconButton(
+                //         onPressed: (){                      
+                //           Navigator.push(context, MaterialPageRoute(builder: (context){
+                //           return const CategoryAdmin();
+                //       }));
+                //         },
+                //         icon: Icon(Icons.add_circle,size: 50,color: Color.fromARGB(255, 0, 1, 8),)),
+                //       IconButton(
+                //         onPressed: (){                      
+                //           Navigator.push(context, MaterialPageRoute(builder: (context){
+                //           return RiwayatPage();
+                //       }));
+                //         },
+                //         icon: Icon(Icons.history_outlined))
+                //     ],
+                //   ),
+                // )
                ]
                ),
         
@@ -165,44 +246,56 @@ class ProfileadminPage extends StatelessWidget {
     );
   }
 
-                    Widget buildCars(Cars cars) => 
-                        Container(
-                          alignment: Alignment.centerLeft,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Colors.white,
-                            boxShadow: [BoxShadow(
-                              color: Color.fromARGB(255, 83, 83, 83),
-                              blurRadius: 3,
-                            )]
-                          ),
-                          child: ListTile(
-                          leading: ConstrainedBox(constraints: 
-                          BoxConstraints(
-                            minWidth: 100,
-                            minHeight: 260,
-                            maxWidth: 150,
-                            maxHeight: 264,
-                          ),
-                          child: Image.asset('assets/1.jpg',
-                          fit: BoxFit.fill ,),),
-                          title: Text(cars.merk, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 22),),
-                          subtitle: Text(cars.tahun.toString()),
-                        ),
-                      );
-  // ListTile(
-  //   leading: CircleAvatar(child: Text('A')),
-  //   title: Text(cars.merk),
-  //   subtitle: Text(cars.tahun.toString()),
-  // );
+  //                   Widget buildCars(Cars cars) => 
+  //                       Container(
+  //                         alignment: Alignment.centerLeft,
+  //                         height: 90,
+  //                         decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(15),
+  //                           color: Colors.white,
+  //                           boxShadow: [BoxShadow(
+  //                             color: Color.fromARGB(255, 83, 83, 83),
+  //                             blurRadius: 3,
+  //                           )]
+  //                         ),
+  //                         child: ListTile(
+  //                         leading: Image.asset('assets/1.jpg'), 
+  //                         title: Text(cars.merk, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 22),),
+  //                         subtitle: Text(cars.tahun.toString()),
+  //                       ),
+  //                     );
+  //                     Widget buildCars2(Cars2 cars2) => 
+  //                       Container(
+  //                         alignment: Alignment.centerLeft,
+  //                         height: 90,
+  //                         decoration: BoxDecoration(
+  //                           borderRadius: BorderRadius.circular(15),
+  //                           color: Colors.white,
+  //                           boxShadow: [BoxShadow(
+  //                             color: Color.fromARGB(255, 83, 83, 83),
+  //                             blurRadius: 3,
+  //                           )]
+  //                         ),
+  //                         child: ListTile(
+  //                         leading: Image.asset('assets/1.jpg'), 
+  //                         title: Text(cars2.merk, style: TextStyle(fontWeight: FontWeight.w800, fontSize: 22),),
+  //                         subtitle: Text(cars2.tahun.toString()),
+  //                       ),
+  //                     );
 
-  Stream<List<Cars>> readCars() => FirebaseFirestore.instance
-  .collection('cars')
-  .snapshots()
-  .map((snapshot) =>
-      snapshot.docs.map((doc) => Cars.fromJson(doc.data())).toList());
-  
+  // // ListTile(
+  // Stream<List<Cars>> readCars() => FirebaseFirestore.instance
+  // .collection('cars')
+  // .where('merk', isEqualTo: 'Avanza')
+  // .snapshots()
+  // .map((snapshot) =>
+  //     snapshot.docs.map((doc) => Cars.fromJson(doc.data())).toList());
+
+  // Stream<List<Cars2>> readCars2() => FirebaseFirestore.instance
+  // .collection('cars2')
+  // .snapshots()
+  // .map((snapshot) =>
+  //     snapshot.docs.map((doc) => Cars2.fromJson(doc.data())).toList());
 }
 
 

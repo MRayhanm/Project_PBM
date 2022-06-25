@@ -37,9 +37,22 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-        
-          title: Text('Profil'),
-      ),
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          toolbarHeight: 70,
+          title: Text('Alamat Rental', style: TextStyle(color: Colors.black),),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+                gradient: LinearGradient(
+                    colors: [Colors.blueAccent,Colors.white],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter
+                )
+            ),
+          ),
+        ),
       body: GoogleMap(
         mapType: MapType.normal,
         markers: {_CarMarker},

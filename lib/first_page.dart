@@ -1,4 +1,5 @@
 import 'package:awal/admin.dart';
+import 'package:awal/bottom.dart';
 import 'package:awal/login.dart';
 import 'package:awal/masuk.dart';
 import 'package:awal/masukadmin.dart';
@@ -45,7 +46,7 @@ class FirstPage extends StatelessWidget {
                         ),
                         ElevatedButton(onPressed: (() {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const MasukPage();
+                            return BottomPage();
                           }));
                         }),
                                 style: ElevatedButton.styleFrom(
@@ -87,7 +88,7 @@ class FirstPage extends StatelessWidget {
                         //         ))),
                           ElevatedButton(onPressed: (() {
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return const MasukAdminPage();
+                            return const LoginAdmin();
                           }));
                         }
                         ),
